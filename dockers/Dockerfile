@@ -1,9 +1,5 @@
 FROM python:3.11
 
-ARG GIT_BRANCH_NAME
-ARG APP_DIR_NAME
-ARG GIT_URI
-
 # 기본 도구 설치
 RUN apt-get update || apt-get update --allow-unauthenticated && \
     apt-get install -y --no-install-recommends \
@@ -17,10 +13,10 @@ RUN apt-get update || apt-get update --allow-unauthenticated && \
 WORKDIR /apps
 
 # Clone the Git repository. Here we dynamically specify the repository name using the variable defined earlier.
-RUN git clone -b ${GIT_BRANCH_NAME} ${GIT_URI} ${APP_DIR_NAME}
+RUN git clone -b main https://github.com/yoju-lab/koreatech_langgraph_multiagent koreatech_langgraph_multiagent
 
 # Changes the working directory to /app/${REPO_NAME}. This uses the variable to dynamically set the directory path.
-WORKDIR /apps/${APP_DIR_NAME}
+WORKDIR /apps/koreatech_langgraph_multiagent
 
 RUN pip install --no-cache-dir -r ./requirements.txt
 
