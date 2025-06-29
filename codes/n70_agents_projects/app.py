@@ -26,10 +26,15 @@ if submitted:
     # 실행 중 표시
     with st.spinner("추천을 생성 중입니다..."):
         try:
-            # LangGraph 실행: 상태를 기반으로 에이전트 흐름 수행
-            events = list(graph.stream(state))
-
-            # 디버깅 로그 출력
+            # LangGraph 실행: 상태를 기반으로 에이전트 흐름 수행 (한 단계씩 출력)
+            st.write("✅ LangGraph 실행 시작")
+            events = []
+            st.divider()
+            st.subheader("🔍 디버깅 정보 (실시간)")
+            for i, e in enumerate(graph.stream(state)):
+                events.append(e)
+                st.markdown(f"**Step {i+1}:** `{list(e.keys())[0]}`")  # 각 노드 이름
+                st.json(e)  # 상태 출력
             st.write("✅ LangGraph 실행 완료")
 
             # 최종 상태 추출 (마지막 단계의 결과)
@@ -43,15 +48,7 @@ if submitted:
             st.subheader("📦 최종 추천 결과")
             st.markdown(final_message)
 
-            # 디버깅 영역: 각 단계별 상태 출력
-            st.divider()
-            st.subheader("🔍 디버깅 정보")
-            for i, e in enumerate(events):
-                st.markdown(f"**Step {i+1}:** `{list(e.keys())[0]}`")  # 각 노드 이름
-                st.json(e)  # 상태 출력
-
         except Exception as e:
             # 예외 발생 시 오류 메시지 출력
             st.error(f"❌ 실행 중 오류 발생: {str(e)}")
-            
-            
+
