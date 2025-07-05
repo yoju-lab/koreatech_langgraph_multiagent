@@ -1,7 +1,7 @@
 FROM python:3.11
 
 # 기본 도구 설치
-RUN apt-get update || apt-get update --allow-unauthenticated && \
+RUN apt-get update && apt-get update --allow-unauthenticated && \
     apt-get install -y --no-install-recommends \
         git \
         curl \
