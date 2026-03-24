@@ -65,11 +65,31 @@ GPT가 이를 이해하고 추천 흐름을 자동으로 제어합니다.
 
 ---
 
-## 🧪 테스트 방법
+---
 
-- 터미널 실행: `python test_runner.py`
-- Pytest 실행: `pytest test_graph.py`
-- Web UI: `streamlit run app.py`
+## 🚀 실행 및 접속 방법
+
+### 1. Web UI 실행 (`app.py`)
+- **역할**: 사용자가 지역과 기분을 입력하고 추천 결과를 실시간으로 확인할 수 있는 Streamlit 기반 웹 인터페이스입니다.
+- **실행 방법**:
+  ```bash
+  streamlit run app.py
+  ```
+- **접속 방법**: 실행 후 터미널에 표시되는 URL(기본값: `http://localhost:8501`)로 브라우저에서 접속합니다.
+
+### 2. LangGraph 핵심 로직 (`run_graph.py`)
+- **역할**: 전체 추천 서비스의 '두뇌' 역할을 하는 오케스트레이터입니다. 각 에이전트(의도 파악, 시간/날씨 확인, 추천 등)를 연결하는 상태 그래프(State Graph)를 정의하고 컴파일합니다.
+- **실행 방법**: 
+  - 본 파일은 라이브러리 형태로 설계되어 `app.py`나 `test_runner.py`에서 임포트되어 실행됩니다.
+  - 단독 로직 테스트를 원할 경우 `test_runner.py`를 실행하십시오.
+
+---
+
+## 🧪 테스트 및 실행 스크립트
+
+- **Web UI 실행**: `streamlit run app.py`
+- **터미널 로직 테스트**: `python test_runner.py`
+- **단위 테스트(Pytest)**: `pytest test_graph.py`
 
 ---
 
@@ -84,7 +104,7 @@ GPT가 이를 이해하고 추천 흐름을 자동으로 제어합니다.
 ## 📂 프로젝트 구성 파일 예시
 
 ```
-📦 ah-mwo-meokji
+📦 ah-mwo-meokji (codes/n70_agents_projects/)
 ├── agents/
 │   ├── intent.py
 │   ├── time.py
@@ -100,7 +120,7 @@ GPT가 이를 이해하고 추천 흐름을 자동으로 제어합니다.
 ├── app.py
 ├── test_runner.py
 ├── test_graph.py
-├── .env
+../.env
 ```
 
 ---
